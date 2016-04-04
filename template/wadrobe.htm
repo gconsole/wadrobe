@@ -1,0 +1,19 @@
+<b>Wadrobe Management System</b>
+<p>
+<b>Upload</b>
+<form name='wadrobe_upload' method='post' enctype="multipart/form-data" action='index.pl'>
+<input type='hidden' name='func' value='post'>
+<input type='hidden' name='page' value='wadrobe'>
+<input type='file' name='wadrobe_file' id='wadrobe_file'>
+<br><input type="submit" value="Submit">
+</form>
+<p>
+<b><a href='?page=listall'>List All</a></b>
+<p>
+<b>Search</b>
+<p>
+<form name='wadrobe_upload' method='get' action='index.pl'>
+<input type='hidden' name='page' value='search'>
+<input type='text' name='search_keyword' id='search_keyword'>
+<br><input type="submit" value="Submit">
+</form>
