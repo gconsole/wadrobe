@@ -1,0 +1,4 @@
+- Having Wardrobe::Item class that represent each item record
+- Create separate Exception class to centralise exception handling
+- Add validation to Uploader, and Wadrobe data update.
+- Use redirection on submit, to prevent form re-submit on page refresh.
