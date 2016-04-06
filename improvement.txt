@@ -2,3 +2,4 @@
 - Create separate Exception class to centralise exception handling
 - Add validation to Uploader, and Wadrobe data update.
 - Use redirection on submit, to prevent form re-submit on page refresh.
+- Maybe create dispatch table to map between page query and the actual method to avoid the knowledge of actual method name. (That would also help get rid of require no strict 'ref')
