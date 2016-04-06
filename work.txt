@@ -1,0 +1,90 @@
+* API(s)
+
+Standard API (integration) 
+Export/import user/product/order data
+This is use mostly for batch update (large chunk of data that doesn't need to be realtime)
+- Using FTP, SFTP as the transport
+- Using flat file for data, supporting format of XSV (csv, psv, tsv), fixed width, and XML
+- Provide notification system via email or text file
+- Several feature supported, such as incremental or full update
+
+SOAP
+Use for realtime data update, same as Standard API which suport export/import of user/product/order
+- Support several iterations of feature release
+- Several version of SOAP WSDL schema
+- Support for Docliteral and RPC Encoded
+
+REST
+Same as SOAP but a lot lighter due to no schema require
+
+Channel Advisor
+System that allow integration between client product on Venda platform to other 3rd party commerce system such as Amazon and Ebay
+- Mostly similar to standard API, as the integration between Venda and Channel Advisor is using flat file for batch update
+
+* Migration
+
+Migration from flat file data base to mongoDB
+
+- A lot easier to work with, can query data directly without having to do the meta data system.
+- Increase maintainability so we don't need indexing system
+- Somehow overall speed is not that much different
+
+* Payment
+
+Thomson Reuter Tax
+Upgrade tax engine (in java) that will connect between Venda tax system and Thomson Reuters. This is to replace the old Sabrix tax that no longer operate.
+- This run as a separate service and connect with Venda platform using post YAML data, and connect with Thomson Reuters using SOAP.
+
+Giftcard payment
+Extend existing payment to support giftcard payment type (both application side, and payment service side which is a separate running service using java).
+
+
+* Issues support
+We have cycle between feature and support work.
+The support work including investigation of the issue, and feedback to help desk team. Also sometime helping them investigate the issue.
+The way the issue is investigate mainly from using the log and track the user journey to mimic the situation and find the cause of the problem.
+At one point I was working mainly as the initial investigator to initially track the problem and provide solution (but not implemented)
+
+- One of the interesting problem we have 
+-- race condition
+-- multiple submission from user (end up in multiple payment, multiple form submit, etc)
+-- redirection to 3rd party payment issue (eg - fail on paypal, end up with user pay multiple times, 3d secure break out page, and the user change item on app side end up with non-match total charged amount, 3d secure payment just gone quiet)
+ 
+
+* Mentoring
+Mainly via code review, and help on issue support (how to debug issue, what sort of information we can get to investigate (app log/apache log/etc))
+
+* Continuous Integration
+
+Not really have it in place. We use Jenkins to control running of each different test suite (app, soap, payment service, tax service).
+Most of the work flow is controlled via Jira
+Review use RB (review board) and git for version control system
+I'm one of the release owner, which will have to verify the work that goes into each release and patch/integration to relevant release branch.
+The verification for release process mainly done via commit changelist and test run.
+
+Test automation
+
+We have QA which take care of test automation (using selenium), for any front-end/browser base automate test.
+- For perl itself, we have application test suite which run across different part of the app. 
+- The test include full functional test (which require full environment setup, including site creation, DB creation, etc), and small set of unit test (which mainly done using mock obj)
+- Test::Unit is used mainly for the test
+- Full test run is done daily every night, it takes roughly 9-10 hours to finish
+- There is cluster test system which allow dev to run the full test within 1 hour (control via Jenkins), this help code verification before release.
+
+RDBMS
+
+Venda use Postgres
+My website use Mysql
+My old work use MSSQL
+
+* Team lead
+
+Mainly talking to PM/client to create the requirement/spec for developer to work on.
+Control the schedule and also review the code quality.
+Also co-ordinate with other team such as QA to test the work, and PM to deliver it to UAT (test environement) for client + release on LIVE.
+
+* Agile
+
+We use full agile process in both Venda and Netsuite, including scrum , sprint and retrospective.
+The usual sprint we do is around 2 weeks , and should not span more than 3 months for each project/feature work.
+
